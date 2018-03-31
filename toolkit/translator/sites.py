@@ -93,17 +93,17 @@ def qq(self, src_data, proxies, src_template, acquirer):
     url = 'http://fanyi.qq.com/api/translate'
     with acquirer:
         acquirer.headers.update(self.headers)
-    resp = self.session.post(
-        url, data={'source': 'auto',
-                   'target': 'en',
-                   'sourceText': src_data,
-                   'sessionUuid': 'translate_uuid%d' % (time.time()*1000)},
-        headers=acquirer.headers, timeout=self.translate_timeout, proxies=proxies)
-    return merge_conflict(
-        src_template,
-        [record["targetText"] for record in json.loads(
-            resp.text)["translate"]["records"]
-         if record.get("sourceText") != "\n"])
+        resp = self.session.post(
+            url, data={'source': 'auto',
+                       'target': 'en',
+                       'sourceText': src_data,
+                       'sessionUuid': 'translate_uuid%d' % (time.time()*1000)},
+            headers=acquirer.headers, timeout=self.translate_timeout, proxies=proxies)
+        return merge_conflict(
+            src_template,
+            [record["targetText"] for record in json.loads(
+                resp.text)["translate"]["records"]
+             if record.get("sourceText") != "\n"])
 
 
 def google(self, src_data, proxies, src_template, acquirer):
