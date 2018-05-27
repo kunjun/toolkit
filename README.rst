@@ -2,7 +2,12 @@
 monitors
 ~~~~~~~~
 
-|image0| ### translator |image1|
+|image0|
+
+translator
+~~~~~~~~~~
+
+|image1|
 
 参考资料
 

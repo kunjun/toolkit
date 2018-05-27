@@ -1,11 +1,26 @@
 # -*- coding:utf-8 -*-
+import os
+import re
+
 try:
     from setuptools import setup, find_packages
 except:
     from distutils.core import setup
 
 
-VERSION = '1.7.5'
+def get_version(package):
+    """
+    Return package version as listed in `__version__` in `__init__.py`.
+    """
+    init_py = open(os.path.join(package, '__init__.py')).read()
+    mth = re.search("__version__\s?=\s?['\"]([^'\"]+)['\"]", init_py)
+    if mth:
+        return mth.group(1)
+    else:
+        raise RuntimeError("Cannot find version!")
+
+
+VERSION = get_version("toolkit")
 
 AUTHOR = "cn"
 
