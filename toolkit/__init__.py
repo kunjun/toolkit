@@ -17,7 +17,7 @@ from queue import Empty
 from itertools import zip_longest
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.6'
+__version__ = '1.7.7'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes
@@ -553,8 +553,10 @@ def _find_caller_name(is_func=False, steps=1):
     if is_func:
         return co.co_name
     else:
-        return os.path.basename(co.co_filename).split(".")[0]
-
+        filename = os.path.basename(co.co_filename).split(".")[0]
+        if filename == "__init__":
+            filename = os.path.basename(os.path.dirname(co.co_filename))
+        return filename
 
 class LazyDict(object):
     """

@@ -20,6 +20,18 @@ def get_version(package):
         raise RuntimeError("Cannot find version!")
 
 
+def install_requires():
+    """
+    Return requires in requirements.txt
+    :return:
+    """
+    try:
+        with open("requirements.txt") as f:
+            return [line.strip() for line in f.readlines() if line.strip()]
+    except OSError:
+        return []
+
+
 VERSION = get_version("toolkit")
 
 AUTHOR = "cn"
@@ -60,7 +72,7 @@ setup(
     url=URL,
     license=LICENSE,
     packages=PACKAGES,
-    install_requires=["python-json-logger", "redis", "kafka-python", "requests"],
+    install_requires=install_requires(),
     include_package_data=True,
     zip_safe=True,
 )
