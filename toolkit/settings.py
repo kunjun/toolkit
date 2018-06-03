@@ -163,7 +163,8 @@ class SettingsLoader(object):
         try:
             if isinstance(setting_module, str):
                 if setting_module[-3:] == '.py':
-                    setting_module = setting_module[:-3]
+                    setting_module = setting_module[:-3].replace(
+                        os.sep, ".").strip(".")
                 settings = importlib.import_module(setting_module)
             else:
                 settings = setting_module

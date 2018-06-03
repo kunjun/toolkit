@@ -53,8 +53,6 @@ KEYWORDS = "tools function"
 
 LICENSE = "MIT"
 
-PACKAGES = ["toolkit", "toolkit.translator"]
-
 setup(
     name=NAME,
     version=VERSION,
@@ -71,7 +69,7 @@ setup(
     author_email=AUTHOR_EMAIL,
     url=URL,
     license=LICENSE,
-    packages=PACKAGES,
+    packages=find_packages(),
     install_requires=install_requires(),
     include_package_data=True,
     zip_safe=True,

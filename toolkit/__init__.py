@@ -17,7 +17,7 @@ from queue import Empty
 from itertools import zip_longest
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.7'
+__version__ = '1.7.9'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes
@@ -756,6 +756,30 @@ def shift_left_for_js(num, count):
 def shift_right_for_js(num, count):
     """位运算左移js版"""
     return int_overflow(num >> count)
+
+
+def get_version(package):
+    """
+    Return package version as listed in `__version__` in `__init__.py`.
+    """
+    init_py = open(os.path.join(package, '__init__.py')).read()
+    mth = re.search("__version__\s?=\s?['\"]([^'\"]+)['\"]", init_py)
+    if mth:
+        return mth.group(1)
+    else:
+        raise RuntimeError("Cannot find version!")
+
+
+def install_requires():
+    """
+    Return requires in requirements.txt
+    :return:
+    """
+    try:
+        with open("requirements.txt") as f:
+            return [line.strip() for line in f.readlines() if line.strip()]
+    except OSError:
+        return []
 
 
 if __name__ == "__main__":
