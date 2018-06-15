@@ -1,6 +1,6 @@
 from collections.abc import MutableSequence, MutableMapping, MutableSet
 
-__all__ = ["Frozen"]
+__all__ = ["Frozen", "FrozenSettings"]
 
 
 class Frozen(MutableSequence, MutableMapping):

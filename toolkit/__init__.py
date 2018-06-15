@@ -14,10 +14,9 @@ import logging
 import warnings
 
 from queue import Empty
-from itertools import zip_longest
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.9'
+__version__ = '1.7.10'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes

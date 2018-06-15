@@ -63,7 +63,7 @@ from collections.abc import Collection, MutableSequence, MutableSet, MutableMapp
 from . import duplicate
 from .frozen import FrozenSettings
 
-__all__ = ["Settings", "SettingsLoader"]
+__all__ = ["Settings", "SettingsLoader", "FrozenSettings"]
 
 logger = logging.getLogger("toolkit.settings")
 
