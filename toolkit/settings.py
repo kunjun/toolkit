@@ -1,8 +1,8 @@
 """
 settings模块使用方法
-In [3]: from toolkit.settings import SettingsWrapper
+In [3]: from toolkit.settings import SettingsLoader
 
-In [4]: sw = SettingsWrapper()
+In [4]: sw = SettingsLoader()
 
 In [5]: settings = sw.load({"a": 1}， "settings")
 
