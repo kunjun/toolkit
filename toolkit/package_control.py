@@ -56,7 +56,7 @@ def _repl(mth, index, dev):
     blank = ""
     if dev:
         if vs.isdigit():
-            versions[index - 1] = vs + "dev1"
+            versions[index - 1] = str(int(vs) + 1) + "dev1"
         else:
             for i in range(len(vs)-1, -1, -1):
                 if not vs[i].isdigit():
@@ -83,7 +83,7 @@ def _repl(mth, index, dev):
             if first == "":
                 raise RuntimeError("Invalid version")
 
-            versions[index - 1] = str(int(first) + 1)
+            versions[index - 1] = first
             blank = (len(vs) - len(first)) * " "
 
     return mth.group(1) + ".".join(versions) + mth.group(3) + blank
