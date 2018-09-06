@@ -16,7 +16,7 @@ import warnings
 from queue import Empty
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.11'
+__version__ = '1.7.13'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes
@@ -757,28 +757,25 @@ def shift_right_for_js(num, count):
     return int_overflow(num >> count)
 
 
-def get_version(package):
+async def readexactly(steam, n):
     """
-    Return package version as listed in `__version__` in `__init__.py`.
-    """
-    init_py = open(os.path.join(package, '__init__.py')).read()
-    mth = re.search("__version__\s?=\s?['\"]([^'\"]+)['\"]", init_py)
-    if mth:
-        return mth.group(1)
-    else:
-        raise RuntimeError("Cannot find version!")
-
-
-def install_requires():
-    """
-    Return requires in requirements.txt
+    asyncio stream read
+    :param steam:
+    :param n:
     :return:
     """
-    try:
-        with open("requirements.txt") as f:
-            return [line.strip() for line in f.readlines() if line.strip()]
-    except OSError:
-        return []
+    if steam._exception is not None:
+        raise steam._exception
+
+    blocks = []
+    while n > 0:
+        block = await steam.read(n)
+        if not block:
+            break
+        blocks.append(block)
+        n -= len(block)
+
+    return b''.join(blocks)
 
 
 if __name__ == "__main__":

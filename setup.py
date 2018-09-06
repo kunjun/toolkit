@@ -64,6 +64,11 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
     ],
+    entry_points={
+        "console_scripts": [
+            "ver-inc = toolkit.package_control:change_version",
+        ]
+    },
     keywords=KEYWORDS,
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
