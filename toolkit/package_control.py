@@ -1,6 +1,5 @@
 import re
 import os
-import sys
 
 from functools import partial
 from argparse import ArgumentParser
@@ -34,13 +33,13 @@ def change_version(index=None, dev=False):
 
     if not index:
         parser = ArgumentParser()
-        parser.add_argument("-i", "--index", type=int, help="版本顺位", required=True)
+        parser.add_argument("-i", "--index", type=int, help="版本顺位", default=3)
         parser.add_argument("-d", "--dev", action="store_true", help="是否是开发模式")
         args = parser.parse_args()
         index = args.index
         dev = args.dev
 
-    package = os.path.basename(os.path.abspath(os.getcwd()))
+    package = os.path.basename(os.path.abspath(os.getcwd())).replace("-", "_")
     with open(os.path.join(package, '__init__.py'), "r+", encoding="utf-8") as f:
         init_py = f.read()
         f.seek(0)

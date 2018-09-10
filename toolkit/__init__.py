@@ -16,7 +16,7 @@ import warnings
 from queue import Empty
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.14'
+__version__ = '1.7.15'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes
