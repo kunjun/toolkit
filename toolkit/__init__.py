@@ -16,7 +16,7 @@ import warnings
 from queue import Empty
 from functools import wraps, reduce, partial
 
-__version__ = '1.7.15'
+__version__ = '1.7.16'
 
 
 _ITERABLE_SINGLE_VALUES = dict, str, bytes
@@ -435,7 +435,12 @@ def load_function(function_str):
     :return: function
     """
     mod_str, _sep, function_str = function_str.rpartition('.')
-    return getattr(load_module(mod_str), function_str)
+    if mod_str:
+        return getattr(load_module(mod_str), function_str)
+    else:
+        # 可能整体是一个模块
+        return load_module(function_str)
+    
 
 load_class = load_function
 
