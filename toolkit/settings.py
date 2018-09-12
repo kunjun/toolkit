@@ -52,6 +52,7 @@ In [28]: type(settings2.c.d)
 Out[28]: toolkit.frozen.Frozen
 """
 import os
+import copy
 import types
 import logging
 import importlib
@@ -204,6 +205,6 @@ class SettingsLoader(object):
         """
         allow_types = tuple(self.allow_types)
         return dict(
-            (k, getattr(settings, k)) for k in dir(settings)
+            (k, copy.deepcopy(getattr(settings, k))) for k in dir(settings)
             if k not in self.ignore and isinstance(
                 getattr(settings, k), allow_types))
